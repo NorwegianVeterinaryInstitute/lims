@@ -30,19 +30,11 @@ def main(process_id, file_id):
                         print("Missing index information for", output.name, ", aborting.")
                         sys.exit(1)
                     try:
-                        match = re.match(r"(\d\d[A-H]) .7\d\d-.5\d\d .*", index_name)
-                        index_well = match.group(1)[2:] + match.group(1)[:2]
+                        match = re.match(r"(UDI|AMP|UDP|IDT)(\d{4}.*)", index_name)
+                        index_well = match.group(2)[5:8]
                     except:
-                        try:
-                            # Convert UDI plate to well position
-                            match = re.match(r"(24UDI|UDI|UDP|IDT10_|IDT)(\d{4}) .*", index_name)
-                            udi_nr = int(match.group(2))
-                            colnr = ((udi_nr - 1) // 8) % 12
-                            rownr = (udi_nr - 1) % 8
-                            index_well = "%s%02d" % (alpha[rownr], colnr+1)
-                        except:
-                            print("Invalid index information for", output.name, " (unable to parse '" + index_name + "').")
-                            sys.exit(1)
+                        print("Invalid index information for", output.name, " (unable to parse '" + index_name + "').")
+                        sys.exit(1)
                     sample_id = output.samples[0].project.name + "." + output.name
                     f.write("{0}{1:02}\t{2}\t{3}\r\n".format(
                         row, col, sample_id, index_well
