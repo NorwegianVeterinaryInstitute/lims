@@ -75,6 +75,13 @@ def main(process_id, file_id):
                 str(genome_size[i]) + "," +
                 str(project_account[i]) + "," + '\n')
     
+    #set process UDFs - Total, Max and Min volumes in pooling list
+
+    process.udf["Total Pool Volume"] = round(sum(sample_volumes),2)
+    process.udf["Max Pooling Volume"] = round(max(sample_volumes),2)
+    process.udf["Min Pooling Volume"] = round(min(sample_volumes),2)
+    process.put()
+
     #print final message. Print warning messages if total volume or individial sample volumes is too high or too small.
 
     warning1a = False #over 26µl, total volume over 1500 and under 2µl
@@ -114,16 +121,22 @@ def main(process_id, file_id):
     
     if warning1a == True:
         print("WARNING: pooling volume(s) > 26µl and <2µl, while total volume is over 1.5ml. Consider making adjustments")
+        sys.exit(1)
     elif warning1b == True:
         print("WARNING: pooling volume(s) > 26µl and total volume is over 1.5ml. Consider making adjustments")
+        sys.exit(1)
     elif warning2a == True:
         print("WARNING: pooling volume(s) > 26µl and < 2µl. Consider making adjustments")
+        sys.exit(1)
     elif warning2b == True:
         print("WARNING: pooling volume(s) > 26µl. Consider making adjustments")
+        sys.exit(1)
     elif warning3 == True:
         print("WARNING: total volume is over 1.5ml. Consider making adjustments")
+        sys.exit(1)
     elif warning4 == True:
         print("WARNING: pooling volume(s) < 2µl. Consider making adjustments")
+        sys.exit(1)
     else:
         print("Successfully created Biomek csv file for pooling")
 
