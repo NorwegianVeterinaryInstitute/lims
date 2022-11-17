@@ -16,17 +16,6 @@ def main(process_id, file_id):
     lims = Lims(config.BASEURI, config.USERNAME, config.PASSWORD)
     process = Process(lims, id=process_id)
 
-    # Cache all analytes/samples and submitted sample udfs
-
-    analytes = process.all_inputs(unique=True)
-    analytes = lims.get_batch(analytes)
-    lims.get_batch(analyte.samples[0] for analyte in analytes)
-
-    analyte_names = [a.name for a in analytes]
-    species = [a.samples[0].udf["Species"] for a in analytes]
-    genome_size = [a.samples[0].udf["Genome Size (Mbp)"] for a in analytes]
-    project_account = [a.samples[0].udf["Project Account"] for a in analytes]
-
     #load inputs and outputs uri`s`
 
     inputs = []
@@ -40,14 +29,17 @@ def main(process_id, file_id):
 
     lims.get_batch(inputs + outputs)
 
-    #load variables for csv-file
+    #load variables needed for script
 
     sample_volumes = [round(input.udf.get('Sample volume to pool (µl)'),2) for input in inputs]
     source_location = [input.location for input in inputs]
-    total_sample_number = len(sample_volumes)
     Pool_names = [output.name for output in outputs]
     sample_name = [input.name for input in inputs]
     molarity = [input.udf.get('Molarity TS (nM)') for input in inputs]
+    project_account = [input.udf.get('Project Account') for input in inputs]
+    genome_size = [input.udf.get('Genome Size (Mbp)') for input in inputs]
+    species = [input.udf.get('Species') for input in inputs]
+    total_sample_number = len(sample_volumes)
 
     #exit script if entered step with more than one pool
 
@@ -141,5 +133,3 @@ def main(process_id, file_id):
         print("Successfully created Biomek csv file for pooling")
 
 main(sys.argv[1], sys.argv[2])
-
-
