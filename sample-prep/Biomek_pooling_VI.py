@@ -39,7 +39,7 @@ def main(process_id, file_id):
     project_account = [input.udf.get('Project Account') for input in inputs]
     genome_size = [input.udf.get('Genome Size (Mbp)') for input in inputs]
     species = [input.udf.get('Species') for input in inputs]
-    total_sample_number = len(sample_volumes)
+    total_sample_number = len(sample_name)
 
     #exit script if entered step with more than one pool
 
