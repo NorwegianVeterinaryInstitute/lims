@@ -305,10 +305,10 @@ def main(process_id, file_id, pdf_file_id):
             warning4 = True
     
     if warning1a == True:
-        print("--> WARNING: pooling volume(s) > {max} µl and < {min} µl, while total volume is over {maxtotal} ml. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
+        print("--> WARNING: pooling volume(s) > {max} µl and < {min} µl, while total volume is over {maxtotal} µl. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
         sys.exit(1)
     elif warning1b == True:
-        print("--> WARNING: pooling volume(s) > {max} and total volume is over {maxtotal}. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
+        print("--> WARNING: pooling volume(s) > {max} and total volume is over {maxtotal} µl. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
         sys.exit(1)
     elif warning2a == True:
         print("--> WARNING: pooling volume(s) > {max} and < {min}. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
@@ -317,7 +317,7 @@ def main(process_id, file_id, pdf_file_id):
         print("--> WARNING: pooling volume(s) > {max}. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
         sys.exit(1)
     elif warning3 == True:
-        print("--> WARNING: total volume is over {maxtotal}. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
+        print("--> WARNING: total volume is over {maxtotal} µl. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
         sys.exit(1)
     elif warning4 == True:
         print("--> WARNING: pooling volume(s) < {min}. Consider making adjustments".format(max = str(max_vol_available),min = str(min_vol_required),maxtotal = str(MAX_TOTAL_VOLUME)))
