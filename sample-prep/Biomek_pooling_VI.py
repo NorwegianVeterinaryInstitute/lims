@@ -145,7 +145,7 @@ def main(process_id, file_id, pdf_file_id):
                 str(re.sub(r':','',source_location[i][1])) + ',' + 
                 'LibraryPool'  + ',' + 
                 "D1" + "," + 
-                str(sample_volumes[i]) + "," + 
+                str(round(sample_volumes[i],1)) + "," + 
                 str(sample_name[i]) + "," + 
                 str(molarity[i]) + "," +
                 str(species[i]) + "," + 
